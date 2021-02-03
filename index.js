@@ -19,6 +19,7 @@ var MovieRecommend = require('./Api/Routers/moviesRecommend')
 var MovieSingle = require('./Api/Routers/moviesSingle')
 var CustomerRoute = require('./Api/Routers/customerRoute')
 var FvrMovieRouter = require('./Api/Routers/favoriteMovies');
+var NTRouter = require('./Api/Routers/notification');
 newapp.use(bodyParser.json());
 newapp.use(bodyParser.urlencoded({ extended: true }));
 newapp.use(express.static('public'));
@@ -30,4 +31,5 @@ newapp.use('/', MovieTheather)
 newapp.use('/', MovieAnime)
 newapp.use('/', CustomerRoute)
 newapp.use('/', FvrMovieRouter)
+newapp.use('/',NTRouter)
 newapp.listen(port, () =>console.log("Hello " + port))
