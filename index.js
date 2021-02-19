@@ -16,5 +16,5 @@ mongoose.connect(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-app.use(CustomerRoute)
+app.use('/',CustomerRoute)
 server.listen(port, () =>console.log("Hello " + port))
