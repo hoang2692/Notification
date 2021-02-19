@@ -10,8 +10,10 @@ try{
             try
             {
                 const customer = new Customer(req.body)
+                console.log(customer);
                 await customer.save()
                 const token = await customer.generateAuthToken()
+                console.log(token);
                 res.status(201).send({customer, token})
             }
             catch(erro){
@@ -21,7 +23,10 @@ try{
         login: async (req,res) =>{
             try{
                 const {email,password} = req.body
+                console.log(email);
+                console.log(password);
                 const customer = await Customer.findByCredentials(email,password)
+                console.log(customer);
                 if(!customer)
                 {
                     return res.send({error: "Login faild! Check authentication"})
