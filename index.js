@@ -1,35 +1,20 @@
 const express = require('express')
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose')
-
+const app = express();
+var server = require("http").Server(app);
+var io = require("socket.io")(server)
+const port = 5000;
+server.listen(port, () =>console.log("Hello " + port))
+const CustomerRoute = require('./Api/Routers/customerRoute')
+require('./middleware/socket')(io)
 mongoose.connect(
-    'mongodb+srv://admin:123@cluster0.kmcmn.gcp.mongodb.net/moviesApp?retryWrites=true&w=majority',{
+    'mongodb+srv://admin:admin@cluster0.jdpe7.mongodb.net/ChatsApp?retryWrites=true&w=majority',{
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true })
         .then(db => console.log("Connect Success"));
-
-const newapp = express();
-const port =process.env.PORT || 5000;
-var MovieCarodel = require('./Api/Routers/moviesCarosel')
-var MovieNews = require('./Api/Routers/moviesNews')
-var MovieTheather = require('./Api/Routers/moviesTheather')
-var MovieAnime = require('./Api/Routers/moviesAnime')
-var MovieRecommend = require('./Api/Routers/moviesRecommend')
-var MovieSingle = require('./Api/Routers/moviesSingle')
-var CustomerRoute = require('./Api/Routers/customerRoute')
-var FvrMovieRouter = require('./Api/Routers/favoriteMovies');
-var NTRouter = require('./Api/Routers/notification');
-newapp.use(bodyParser.json());
-newapp.use(bodyParser.urlencoded({ extended: true }));
-newapp.use(express.static('public'));
-newapp.use('/', MovieCarodel)
-newapp.use('/', MovieNews)
-newapp.use('/', MovieRecommend)
-newapp.use('/', MovieSingle)
-newapp.use('/', MovieTheather)
-newapp.use('/', MovieAnime)
-newapp.use('/', CustomerRoute)
-newapp.use('/', FvrMovieRouter)
-newapp.use('/',NTRouter)
-newapp.listen(port, () =>console.log("Hello " + port))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(CustomerRoute)

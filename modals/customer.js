@@ -23,21 +23,16 @@ const UserSchema = new mongoose.Schema({
             }
         }
     },
-    position:{
-        type: String,
-    },
     password:
     {
         type: String,
         required: true,
         minlength: 8,
     },
-    favoriteMovie: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "FavoriteMovie"
-        }
-    ],
+    registration_date:{
+        type: Date,
+        default: Date.now
+    },
     tokens:
     [{
         token: {

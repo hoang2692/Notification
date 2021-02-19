@@ -78,19 +78,6 @@ try{
             var deleteProduct = await Customer.findByIdAndDelete({_id: req.params.id})
             res.json(deleteProduct)
         },
-        deleteMovie: async (req,res) =>{
-            var customer = await Customer.findById({_id: req.params.idCustomer})
-            if(customer)
-            {
-                const index = customer.favoriteMovie.indexOf(req.params.idMovie)
-                if(index > -1)
-                {
-                    customer.favoriteMovie.splice(index,1)
-                }
-                customer.save()
-            }
-            res.json(customer)
-        },
     }
     module.exports = CustomerControler;
 }
