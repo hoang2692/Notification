@@ -11,7 +11,7 @@ try{
             {
                 const customer = new Customer(req.body)
                 await customer.save()
-                const token = await Customer.generateAuthToken()
+                const token = await customer.generateAuthToken()
                 res.status(201).send({customer, token})
             }
             catch(erro){
