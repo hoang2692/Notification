@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 const app = express();
 var server = require("http").Server(app);
 var io = require("socket.io")(server)
-const port = 5000;
+const port =process.env.PORT || 5000;
 server.listen(port, () =>console.log("Hello " + port))
 const CustomerRoute = require('./Api/Routers/customerRoute')
 require('./middleware/socket')(io)
